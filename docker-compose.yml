@@ -1,0 +1,87 @@
+version: '3'
+services:
+    videohub-nginx:
+        build:
+            context: ./project/docker/development
+            dockerfile: nginx.docker
+        volumes:
+            - ./project:/app
+        depends_on:
+            - videohub-php-fpm
+        ports:
+            - "8080:80"
+    videohub-php-fpm:
+        build:
+            context: ./project/docker/development
+            dockerfile: php-fpm.docker
+        volumes:
+            - ./project:/app
+        depends_on:
+            - videohub-postgres
+            - videohub-redis
+            - mailer
+    videohub-php-cli:
+        build:
+            context: ./project/docker/development
+            dockerfile: php-cli.docker
+        volumes:
+            - ./project:/app
+            - composer:/root/.composer/cache
+        depends_on:
+            - videohub-postgres
+            - videohub-redis
+            - mailer
+    videohub-node-watch:
+        image: node:11.13-alpine
+        volumes:
+            - ./project:/app
+        working_dir: /app
+        command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && npm run watch"
+    videohub-node:
+        image: node:11.13-alpine
+        volumes:
+            - ./project:/app
+        working_dir: /app
+    videohub-postgres:
+        image: postgres:11.2-alpine
+        volumes:
+            - videohub-postgres:/var/lib/postgresql/data
+        environment:
+            POSTGRES_USER: app
+            POSTGRES_PASSWORD: secret
+            POSTGRES_DB: app
+        ports:
+            - "54321:5432"
+    videohub-adminer:
+        image: dockette/adminer:full-php5
+        restart: always
+        depends_on:
+            - videohub-postgres
+        ports:
+            - "8282:8080"
+    videohub-mysql:
+        image: mysql:5.7
+        ports:
+            - "3308:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_DATABASE: app
+            MYSQL_USER: app
+            MYSQL_PASSWORD: secret
+        volumes:
+            - ./data/mysql:/var/lib/mysql:cached
+    videohub-redis:
+        image: redis:3.0-alpine
+        volumes:
+            - videohub-redis:/data
+        command: redis-server --requirepass secret
+
+    mailer:
+        image: mailhog/mailhog
+        ports:
+            - "8081:8025"
+
+volumes:
+    videohub-postgres:
+    videohub-redis:
+    composer:
