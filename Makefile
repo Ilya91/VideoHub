@@ -35,7 +35,7 @@ videohub-wait-db:
 	until docker-compose exec -T videohub-postgres pg_isready --timeout=0 --dbname=app ; do sleep 1 ; done
 
 videohub-migrations:
-	docker-compose run --rm videohub-php-cli php bin/console doctrine:migrations:migrate --no-interaction
+	docker-compose run --rm videohub-php-cli php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
 
 videohub-fixtures:
 	docker-compose run --rm videohub-php-cli php bin/console doctrine:fixtures:load --no-interaction
