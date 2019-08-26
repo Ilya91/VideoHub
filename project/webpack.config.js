@@ -8,9 +8,9 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 Encore
     // directory where compiled assets will be stored
-    .setOutputPath('public/build/')
+    .setOutputPath('public/assets/')
     // public path used by the web server to access the output path
-    .setPublicPath('/build')
+    .setPublicPath('/assets')
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
@@ -23,7 +23,13 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/js/app.js')
+    .addStyleEntry('css/dashboard', ['./assets/css/dashboard.css'])
+    .addStyleEntry('css/login', ['./assets/css/login.css'])
+    .addStyleEntry('css/styles', ['./assets/css/styles.css'])
+    .addStyleEntry('css/fontawesome.min', ['./assets/css/fontawesome.min.css'])
+    .addEntry('js/jquery', './assets/js/jquery.js')
+    .addEntry('js/popper', './assets/js/popper.js')
+    .addEntry('js/bootstrap', './assets/js/bootstrap.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
