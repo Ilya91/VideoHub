@@ -6,14 +6,17 @@
  */
 
 // any CSS you require will output into a single css file (app.css in this case)
-require('../css/dashboard.css');
-require('../css/fontawesome.min.css');
-require('../css/login.css');
-require('../css/styles.css');
 
-const $ = require('jquery');
+var $ = require('jquery');
+global.$ = $;
+global.jQuery = $;
 // this "modifies" the jquery module: adding behavior to it
 // the bootstrap module doesn't export/return anything
+require('popper.js');
 require('bootstrap');
+require('./custom.js');
+
+require('../css/styles.css');
+require('../css/fontawesome.min.css');
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');

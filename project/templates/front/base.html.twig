@@ -6,18 +6,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        <style>
+            .form-control {
+                background-color: #f8f5f5;
+            }
+        </style>
+    {% endblock %}
 
-    <style>
-        .form-control {
-            background-color: #f8f5f5;
-        }
-    </style>
-
-    <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.min.css') }}">
-
-    {% block customstylesheets %}{% endblock %}
     <title>{% block title %}Symfony 4 course app - video sharing service{% endblock %}</title>
 
 </head>
@@ -35,15 +32,8 @@
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="{{ asset('assets/js/jquery.js') }}"></script>
-<script src="{{ asset('assets/js/popper.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap.js') }}"></script>
-
-<script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-</script>
-{% block customjavascript %}{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
 </body>
 </html>

@@ -8,9 +8,9 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 Encore
     // directory where compiled assets will be stored
-    .setOutputPath('public/assets/')
+    .setOutputPath('public/build/')
     // public path used by the web server to access the output path
-    .setPublicPath('/assets')
+    .setPublicPath('/build')
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
@@ -23,13 +23,11 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addStyleEntry('css/dashboard', ['./assets/css/dashboard.css'])
-    .addStyleEntry('css/login', ['./assets/css/login.css'])
-    .addStyleEntry('css/styles', ['./assets/css/styles.css'])
-    .addStyleEntry('css/fontawesome.min', ['./assets/css/fontawesome.min.css'])
-    .addEntry('js/jquery', './assets/js/jquery.js')
-    .addEntry('js/popper', './assets/js/popper.js')
-    .addEntry('js/bootstrap', './assets/js/bootstrap.js')
+    // .addStyleEntry('css/dashboard', ['./assets/css/dashboard.css'])
+    // .addStyleEntry('css/login', ['./assets/css/login.css'])
+    // .addStyleEntry('css/styles', ['./assets/css/styles.css'])
+    // .addStyleEntry('css/fontawesome.min', ['./assets/css/fontawesome.min.css'])
+    .addEntry('app', './assets/js/app.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -38,7 +36,8 @@ Encore
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
-    .enableSingleRuntimeChunk()
+    //.enableSingleRuntimeChunk()
+    .disableSingleRuntimeChunk()
 
     /*
      * FEATURE CONFIG
@@ -70,7 +69,12 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
+    // .autoProvideVariables({
+    //     $: 'jquery',
+    //     jQuery: 'jquery',
+    //     'window.jQuery': 'jquery'
+    // })
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
