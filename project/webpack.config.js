@@ -23,7 +23,7 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    // .addStyleEntry('css/dashboard', ['./assets/css/dashboard.css'])
+    .addStyleEntry('css/dashboard', ['./assets/css/dashboard.css'])
     // .addStyleEntry('css/login', ['./assets/css/login.css'])
     // .addStyleEntry('css/styles', ['./assets/css/styles.css'])
     // .addStyleEntry('css/fontawesome.min', ['./assets/css/fontawesome.min.css'])

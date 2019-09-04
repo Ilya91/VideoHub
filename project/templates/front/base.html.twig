@@ -8,11 +8,9 @@
 
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
-        <style>
-            .form-control {
-                background-color: #f8f5f5;
-            }
-        </style>
+    {% endblock %}
+
+    {% block customstyles %}
     {% endblock %}
 
     <title>{% block title %}Symfony 4 course app - video sharing service{% endblock %}</title>
