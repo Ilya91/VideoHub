@@ -51,3 +51,11 @@ watch:
 
 videohub-test:
 	docker-compose run --rm videohub-php-cli php bin/phpunit
+
+psql:
+	docker exec -it videohub_videohub-postgres_1 psql -U app -W app
+
+fixtures:
+	docker-compose run --rm videohub-php-cli php bin/console doctrine:schema:drop -n -q --force --full-database
+	docker-compose run --rm videohub-php-cli php bin/console doctrine:migrations:migrate -n -q
+	docker-compose run --rm videohub-php-cli php bin/console doctrine:fixtures:load -n -q

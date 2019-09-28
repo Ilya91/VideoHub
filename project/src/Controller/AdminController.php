@@ -20,4 +20,13 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/my_profile.html.twig');
     }
+
+    /**
+     * @Route("/categories", name="admin_categories")
+     * @Template("/admin")
+     */
+    public function categories()
+    {
+        return $this->render('admin/categories.html.twig');
+    }
 }
