@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,6 +28,11 @@ class AdminController extends AbstractController
      */
     public function categories()
     {
-        return $this->render('admin/categories.html.twig');
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->find(1);
+        //dump($categories);
+        return $this->render('admin/categories.html.twig', [
+            //'categories' => $categories
+        ]);
     }
 }
