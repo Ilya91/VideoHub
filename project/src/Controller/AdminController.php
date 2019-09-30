@@ -29,8 +29,8 @@ class AdminController extends AbstractController
     public function categories()
     {
         $repository = $this->getDoctrine()->getRepository(Category::class);
-        $categories = $repository->find(1);
-        //dump($categories);
+        $categories = $repository->getMainCategories();
+        dump($categories);
         return $this->render('admin/categories.html.twig', [
             //'categories' => $categories
         ]);
