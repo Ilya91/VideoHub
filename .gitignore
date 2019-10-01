@@ -12,3 +12,5 @@
 /project/node_modules/
 /project/var/cache/dev/
 /project/vendor/
+/project/.idea/
+/project/package-lock.json
