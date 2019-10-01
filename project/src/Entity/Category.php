@@ -27,10 +27,10 @@ class Category
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="subcategories")
      */
-    private $parent_id;
+    private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="parent_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="parent")
      */
     private $subcategories;
 
@@ -64,12 +64,12 @@ class Category
 
     public function getParent(): ?self
     {
-        return $this->parent_id;
+        return $this->parent;
     }
 
     public function setParent(?self $parent): self
     {
-        $this->parent_id = $parent;
+        $this->parent = $parent;
 
         return $this;
     }

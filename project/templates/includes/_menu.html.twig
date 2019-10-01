@@ -7,11 +7,7 @@
     </form>
 
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="{{ path('videolist') }}">Funny</a>
-        <a class="p-2 text-dark" href="{{ path('videolist') }}">Scary</a>
-        <a class="p-2 text-dark" href="{{ path('videolist') }}">Unbelievable</a>
-        <a class="p-2 text-dark" href="{{ path('videolist') }}">Inspirational</a>
-        <a class="p-2 text-dark" href="{{ path('videolist') }}">Motivating</a>
+        {{ render(controller("App\\Controller\\FrontController::mainCategories")) }}
         <a class="p-2 text-dark" href="{{ path('admin_my_profile') }}">My account</a>
     </nav>
     <a class="btn btn-outline-primary mr-2" href="pricing">Sign up</a>
