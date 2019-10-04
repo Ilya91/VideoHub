@@ -18,7 +18,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/", name="admin_main_page")
      */
-    public function index()
+    public function index(): Response
     {
         return $this->render('admin/my_profile.html.twig');
     }
@@ -39,11 +39,15 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/edit-category", name="edit_category")
+     * @Route("/edit-category/{id}", name="edit_category")
+     * @param Category $category
+     * @return Response
      */
-    public function editCategory(): Response
+    public function editCategory(Category $category): Response
     {
-        return $this->render('admin/edit_category.html.twig');
+        return $this->render('admin/edit_category.html.twig', [
+            'category' => $category
+        ]);
     }
 
     /**
@@ -85,9 +89,10 @@ class AdminController extends AbstractController
 
     /**
      * @param CategoryTreeAdminOptionList $categories
+     * @param null $editedCategory
      * @return Response
      */
-    public function getAllCategories(CategoryTreeAdminOptionList $categories): Response
+    public function getAllCategories(CategoryTreeAdminOptionList $categories, $editedCategory = null): Response
     {
         $categories->getCategoryList($categories->buildTree());
         return $this->render('admin/_all_categories.html.twig',[
