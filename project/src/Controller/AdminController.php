@@ -6,6 +6,7 @@ use App\Utils\CategoryTreeAdminOptionList;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Utils\CategoryTreeAdminList;
 use App\Entity\Category;
@@ -48,6 +49,24 @@ class AdminController extends AbstractController
         return $this->render('admin/edit_category.html.twig', [
             'category' => $category
         ]);
+    }
+
+    /**
+     * @Route("/update-category/{id}", name="update_category")
+     * @param Request $request
+     * @param Category $category
+     * @return RedirectResponse
+     */
+    public function updateCategory(Request $request, Category $category): RedirectResponse
+    {
+        $em = $this->getDoctrine()->getManager();
+        $parent = $em->getRepository(Category::class)->find((int)($request->get('parent')));
+
+        $category->setName($request->get('name'));
+        $category->setParent($parent);
+        $em->flush();
+
+        return $this->redirectToRoute('categories');
     }
 
     /**
@@ -96,7 +115,8 @@ class AdminController extends AbstractController
     {
         $categories->getCategoryList($categories->buildTree());
         return $this->render('admin/_all_categories.html.twig',[
-            'categories'=>$categories
+            'categories' => $categories,
+            'editedCategory' => $editedCategory
         ]);
     }
 }

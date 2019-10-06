@@ -2,17 +2,13 @@
 {% block mainadmin %}
 <h2>Editing category</h2>
 
-<form action="#" method="POST">
-    <input type="text" class="form-control is-invalid" id="validationServer01" placeholder="Category name" value="{{ category.name }}"
-        required>
+<form action="{{ path('update_category', {'id': category.id}) }}" method="POST">
+    <input type="text" name="name" class="form-control is-invalid" id="validationServer01" placeholder="Category name" value="{{ category.name }}" required>
     <br>
     <label for="inlineFormCustomSelect">Parent:</label>
-    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+    <select name="parent" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
         {{render(controller('App\\Controller\\AdminController::getAllCategories', {'editedCategory':category}))}}
     </select>
-    <div class="invalid-feedback">
-        Category already exists!
-    </div>
     <button class="btn btn-primary mt-3" type="submit">Save</button>
 
 </form>
