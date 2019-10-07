@@ -6,3 +6,15 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 /.ready
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+/var/cache/test/
+/phpunit.xml.dist
+/bin/phpunit
+/tests/.gitignore
+/config/packages/test/validator.yaml
+/config/packages/validator.yaml
