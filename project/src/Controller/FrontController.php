@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Video;
 use App\Utils\CategoryTreeFrontPage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,16 +25,17 @@ class FrontController extends AbstractController
      * @param CategoryTreeFrontPage $categories
      * @return Response
      */
-    public function videolist($id, CategoryTreeFrontPage $categories)
+    public function videoList($id, CategoryTreeFrontPage $categories)
     {
+        $videos = $this->getDoctrine()
+            ->getRepository(Video::class)
+            ->findAll();
+
         $categories->getCategoryListAndParent($id);
-        dump($categories);
-        $sample_videos = [289729765, 289765765, 247729765, 282329765];
-        return $this->render('front/videolist.html.twig', [
-                'sample_videos' => $sample_videos,
-                'subcategories' => $categories
-            ]
-        );
+        return $this->render('front/videolist.html.twig',[
+            'subcategories' => $categories,
+            'videos'=>$videos
+        ]);
     }
 
     /**

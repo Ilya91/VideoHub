@@ -4,3 +4,6 @@ rm /var/www/videohub/project/src/Migrations/*.php &&
 bin/console make:migration && 
 bin/console doctrine:migrations:migrate -n -q && 
 bin/console doctrine:fixtures:load -n -q
+
+Short command:
+bin/console doctrine:schema:drop -n -q --force --full-database && bin/console doctrine:migrations:migrate -n -q && bin/console doctrine:fixtures:load -n -q
