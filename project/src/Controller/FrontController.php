@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class FrontController extends AbstractController
 {
     /**
-     * @Route("/", name="main")
+     * @Route("/", name="main_page")
      */
     public function index()
     {

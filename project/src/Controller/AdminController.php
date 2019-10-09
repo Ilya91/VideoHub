@@ -27,7 +27,7 @@ class AdminController extends AbstractController
 
 
     /**
-     * @Route("/categories", name="categories", methods={"GET", "POST"})
+     * @Route("/su/categories", name="categories", methods={"GET", "POST"})
      * @param CategoryTreeAdminList $categories
      * @param Request $request
      * @return Response
@@ -66,7 +66,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/edit-category/{id}", name="edit_category")
+     * @Route("/su/edit-category/{id}", name="edit_category")
      * @param Category $category
      * @return Response
      */
@@ -78,7 +78,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/update-category/{id}", name="update_category")
+     * @Route("/su/update-category/{id}", name="update_category")
      * @param Request $request
      * @param Category $category
      * @return RedirectResponse
@@ -97,7 +97,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/delete-category/{id}", name="delete_category")
+     * @Route("/su/delete-category/{id}", name="delete_category")
      * @param Category $category
      * @return RedirectResponse
      */
@@ -118,7 +118,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/upload-video", name="upload_video")
+     * @Route("/su/upload-video", name="upload_video")
      */
     public function uploadVideo(): Response
     {
@@ -126,7 +126,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/users", name="users")
+     * @Route("/su/users", name="users")
      */
     public function users(): Response
     {
