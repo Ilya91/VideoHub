@@ -31,7 +31,7 @@ security:
             # https://symfony.com/doc/current/security/form_login_setup.html
             logout:
                 path: logout
-                target: main_page
+                target: main
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
