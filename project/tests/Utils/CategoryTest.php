@@ -63,7 +63,7 @@ class CategoryTest extends KernelTestCase
     public function dataForCategoryTreeFrontPage()
     {
         yield [
-            '<ul><li><a href="/videolist/childrens-books,%2015">childrens-books</a></li><li><a href="/videolist/kindle-ebooks,%2016">kindle-ebooks</a></li></ul>',
+            '<ul><li><a href="/videolist/childrens-books/15">childrens-books</a></li><li><a href="/videolist/kindle-ebooks/16">kindle-ebooks</a></li></ul>',
             [
                 ['name'=>'Books','id'=>3, 'parent_id'=>null],
                 ['name'=>'Children\'s Books','id'=>15, 'parent_id'=>3],
