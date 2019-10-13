@@ -25,6 +25,9 @@ class FrontControllerCommentsTest extends WebTestCase
     }
 
 
+    /**
+     *
+     */
     public function testNewCommentAndNumberOfComments()
     {
 
@@ -39,7 +42,7 @@ class FrontControllerCommentsTest extends WebTestCase
 
         $this->assertContains('Test comment', $this->client->getResponse()->getContent());
 
-        $crawler = $this->client->request('GET', '/video-list/category/toys,2');
+        $crawler = $this->client->request('GET', '/videolist/toys/2');
         $this->assertSame('Comments (1)', $crawler->filter('a.ml-1')->text());
 
     }

@@ -18,3 +18,12 @@ yarn-error.log
 /tests/.gitignore
 /config/packages/test/validator.yaml
 /config/packages/validator.yaml
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
