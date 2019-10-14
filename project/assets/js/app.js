@@ -15,8 +15,10 @@ global.jQuery = $;
 require('popper.js');
 require('bootstrap');
 require('./custom.js');
+require('./likes.js');
 
 require('../css/styles.css');
 require('../css/fontawesome.min.css');
+require('../css/likes.css');
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
