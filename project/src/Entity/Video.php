@@ -14,7 +14,7 @@ class Video
 {
     public const videoForNotLoggedIn = 113716040; // vimeo id
     public const VimeoPath = 'https://player.vimeo.com/video/';
-    public const perPage = 5; // for pagination
+    public const perPage = 6; // for pagination
 
     /**
      * @ORM\Id()

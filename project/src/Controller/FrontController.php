@@ -10,6 +10,7 @@ use App\Form\UserType;
 use App\Repository\VideoRepository;
 use App\Utils\CategoryTreeFrontPage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -211,8 +212,11 @@ class FrontController extends AbstractController
      * @Route("/video/{video}/dislike", name="dislike_video", methods={"POST"})
      * @Route("/video/{video}/unlike", name="undo_like_video", methods={"POST"})
      * @Route("/video/{video}/undodislike", name="undo_dislike_video", methods={"POST"})
+     * @param Video $video
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function toggleLikesAjax(Video $video, Request $request)
+    public function toggleLikesAjax(Video $video, Request $request): JsonResponse
     {
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
@@ -239,7 +243,11 @@ class FrontController extends AbstractController
         return $this->json(['action' => $result,'id'=>$video->getId()]);
     }
 
-    private function likeVideo($video)
+    /**
+     * @param $video
+     * @return string
+     */
+    private function likeVideo($video): string
     {
         $user = $this->getDoctrine()->getRepository(User::class)->find($this->getUser());
         $user->addLikedVideo($video);
