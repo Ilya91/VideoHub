@@ -7,7 +7,7 @@ use App\Tests\Rollback;
 
 class FrontControllerCommentsTest extends WebTestCase
 {
-    use Rollback;
+    use RoleAdmin;
 
     public function testNotLoggedInUser()
     {
@@ -30,19 +30,19 @@ class FrontControllerCommentsTest extends WebTestCase
      */
     public function testNewCommentAndNumberOfComments()
     {
+        $client = static::createClient();
+        $client->followRedirects();
 
-        $this->client->followRedirects();
-
-        $crawler = $this->client->request('GET', '/video-details/16');
+        $crawler = $client->request('GET', '/video-details/16');
 
         $form = $crawler->selectButton('Add')->form([
             'comment' => 'Test comment',
         ]);
-        $this->client->submit($form);
+        $client->submit($form);
 
-        $this->assertContains('Test comment', $this->client->getResponse()->getContent());
+        $this->assertContains('Test comment', $client->getResponse()->getContent());
 
-        $crawler = $this->client->request('GET', '/videolist/toys/2');
+        $crawler = $client->request('GET', '/videolist/toys/2');
         $this->assertSame('Comments (1)', $crawler->filter('a.ml-1')->text());
 
     }

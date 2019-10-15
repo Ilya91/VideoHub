@@ -7,13 +7,13 @@ use App\Entity\Category;
 
 class AdminControllerCategoriesTest extends WebTestCase
 {
-    use Rollback;
+    use RoleAdmin;
 
     public function testTextOnPage()
     {
         $crawler = $this->client->request('GET', '/admin/su/categories');
         $this->assertSame('Categories list', $crawler->filter('h2')->text());
-        $this->assertContains('Electronics', $this->client->getResponse()->getContent());
+        $this->assertContains('Toys', $this->client->getResponse()->getContent());
     }
 
     public function testNumberOfItems()
