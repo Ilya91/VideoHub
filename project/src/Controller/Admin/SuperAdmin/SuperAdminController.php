@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin\Superadmin;
+namespace App\Controller\Admin\SuperAdmin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;

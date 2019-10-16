@@ -10,6 +10,7 @@ use App\Entity\Video;
 use App\Form\UserType;
 use App\Repository\VideoRepository;
 use App\Utils\CategoryTreeFrontPage;
+use App\Utils\VideoForNoValidSubscription;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -36,21 +37,24 @@ class FrontController extends AbstractController
      * @param $id
      * @param $page
      * @param CategoryTreeFrontPage $categories
+     * @param Request $request
+     * @param VideoForNoValidSubscription $video_no_members
      * @return Response
      */
-    public function videoList($id, $page, CategoryTreeFrontPage $categories, Request $request)
+    public function videoList($id, $page, CategoryTreeFrontPage $categories, Request $request, VideoForNoValidSubscription $video_no_members) // c_88
     {
-        $ids = $categories->getChildIds((int)$id);
+        $ids = $categories->getChildIds($id);
         array_push($ids, $id);
 
         $videos = $this->getDoctrine()
             ->getRepository(Video::class)
             ->findByChildIds($ids ,$page, $request->get('sortby'));
 
-        $categories->getCategoryListAndParent((int)$id);
+        $categories->getCategoryListAndParent($id);
         return $this->render('front/videolist.html.twig',[
             'subcategories' => $categories,
-            'videos'=>$videos
+            'videos'=>$videos,
+            'video_no_members' => $video_no_members->check()
         ]);
     }
 
