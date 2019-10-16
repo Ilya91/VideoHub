@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse as RedirectResponseAlias;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -26,7 +27,29 @@ class MainController extends AbstractController
      */
     public function index()
     {
-        return $this->render('admin/my_profile.html.twig');
+        return $this->render('admin/my_profile.html.twig', [
+            'subscription' => $this->getUser()->getSubscription()
+        ]);
+    }
+
+    /**
+     * @Route("/cancel-plan", name="cancel_plan")
+     */
+    public function cancelPlan(): RedirectResponseAlias
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)->find($this->getUser());
+
+        $subscription = $user->getSubscription();
+        $subscription->setValidTo(new \Datetime());
+        $subscription->setPaymentStatus(null);
+        $subscription->setPlan('canceled');
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->persist($subscription);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin_main_page');
     }
 
     /**
