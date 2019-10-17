@@ -135,5 +135,12 @@ class VideoFixtures extends Fixture
 
         ];
     }
+
+    public function getDependencies()
+    {
+        return array(
+            UserFixtures::class
+        );
+    }
 }
 
