@@ -123,13 +123,6 @@ class FrontController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/pricing", name="pricing")
-     */
-    public function pricing()
-    {
-        return $this->render('front/pricing.html.twig');
-    }
 
     /**
      * @Route("/register", name="register")
