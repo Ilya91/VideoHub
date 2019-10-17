@@ -24,6 +24,7 @@ class Category
 
     /**
      * @Assert\NotBlank(message = "The name is required")
+     * @Assert\NotNull
      * @ORM\Column(type="string", length=45, unique=true)
      */
     private $name;
