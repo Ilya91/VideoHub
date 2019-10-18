@@ -5,12 +5,13 @@ namespace App\Listeners;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use App\Entity\Video;
 use App\Entity\User;
+use Twig\Environment;
 
 
 class RegisterListener
 {
 
-    public function __construct(\Twig_Environment $templating, \Swift_Mailer $mailer)
+    public function __construct(Environment $templating, \Swift_Mailer $mailer)
     {
         $this->templating = $templating;
         $this->mailer = $mailer;
