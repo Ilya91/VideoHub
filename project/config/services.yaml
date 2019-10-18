@@ -42,3 +42,8 @@ services:
     Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
         arguments:
             - '@Redis'
+
+
+    App\Listeners\RegisterListener:
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
