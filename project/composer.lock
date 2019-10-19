@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5cde37e82d5a469fd0ca8c9e0f0ae498",
+    "content-hash": "a33df30ae2086b5aea443e716a6af5bc",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2021,16 +2021,16 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v4.3.3",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "d263af3cec33afa862310e58545fdc10d779806f"
+                "reference": "40c62600ebad1ed2defbf7d35523d918a73ab330"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/d263af3cec33afa862310e58545fdc10d779806f",
-                "reference": "d263af3cec33afa862310e58545fdc10d779806f",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/40c62600ebad1ed2defbf7d35523d918a73ab330",
+                "reference": "40c62600ebad1ed2defbf7d35523d918a73ab330",
                 "shasum": ""
             },
             "require": {
@@ -2095,7 +2095,7 @@
                 "caching",
                 "psr6"
             ],
-            "time": "2019-06-28T13:16:30+00:00"
+            "time": "2019-10-04T10:57:53+00:00"
         },
         {
             "name": "symfony/cache-contracts",
