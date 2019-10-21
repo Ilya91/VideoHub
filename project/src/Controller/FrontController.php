@@ -10,6 +10,7 @@ use App\Entity\Video;
 use App\Form\UserType;
 use App\Repository\VideoRepository;
 use App\Utils\CategoryTreeFrontPage;
+use App\Utils\Interfaces\CacheInterface;
 use App\Utils\VideoForNoValidSubscription;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -39,23 +40,44 @@ class FrontController extends AbstractController
      * @param CategoryTreeFrontPage $categories
      * @param Request $request
      * @param VideoForNoValidSubscription $video_no_members
+     * @param CacheInterface $cache
      * @return Response
      */
-    public function videoList($id, $page, CategoryTreeFrontPage $categories, Request $request, VideoForNoValidSubscription $video_no_members) // c_88
+    public function videoList(
+        $id,
+        $page,
+        CategoryTreeFrontPage $categories,
+        Request $request,
+        VideoForNoValidSubscription $video_no_members,
+        CacheInterface $cache )
     {
-        $ids = $categories->getChildIds($id);
-        array_push($ids, $id);
+        $cache = $cache->cache;
+        $video_list = $cache->getItem('video_list'.$id.$page.$request->get('sortby'));
+        // $video_list->tag(['video_list']);
+        $video_list->expiresAfter(60);
 
-        $videos = $this->getDoctrine()
-            ->getRepository(Video::class)
-            ->findByChildIds($ids ,$page, $request->get('sortby'));
 
-        $categories->getCategoryListAndParent($id);
-        return $this->render('front/videolist.html.twig',[
-            'subcategories' => $categories,
-            'videos'=>$videos,
-            'video_no_members' => $video_no_members->check()
-        ]);
+        if(!$video_list->isHit())
+        {
+            $ids = $categories->getChildIds($id);
+            array_push($ids, $id);
+
+            $videos = $this->getDoctrine()
+                ->getRepository(Video::class)
+                ->findByChildIds($ids ,$page, $request->get('sortby'));
+
+            $categories->getCategoryListAndParent($id);
+            $response = $this->render('front/videolist.html.twig',[
+                'subcategories' => $categories,
+                'videos'=>$videos,
+                'video_no_members' => $video_no_members->check()
+            ]);
+
+            $video_list->set($response);
+            $cache->save($video_list);
+        }
+
+        return $video_list->get();
     }
 
     /**
